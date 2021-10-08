@@ -1,0 +1,38 @@
+[package]
+name = "homepage"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = {version = "1.0.44", features = ["backtrace"] }
+dotenv = "0.15.0"
+tracing = "0.1.29"
+tracing-subscriber = "0.2.25"
+tracing-futures = "0.2.5"
+sentry-anyhow = {version = "0.23.0", features = ["backtrace"]}
+
+[dependencies.tokio]
+version = "1.12.0"
+default-features = false
+features = [
+    "rt",
+    "macros",
+    "rt-multi-thread"
+]
+
+[dependencies.sentry]
+version = "0.23.0"
+default-features = false
+
+features = [
+    "backtrace",
+    "contexts",
+    "panic",
+    "anyhow",
+    "debug-images",
+    "tracing",
+    "reqwest",
+    "rustls"
+]
