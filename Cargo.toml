@@ -1,4 +1,6 @@
 [workspace]
 members = [
-    "homepage"
+    "homepage",
+    "proto/gemini",
+    "proto/stream"
 ]

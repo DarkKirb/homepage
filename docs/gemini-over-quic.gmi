@@ -1,0 +1,24 @@
+# Gemini over QUIC
+
+This file is an attempt to allow gemini to be used over QUIC
+
+=> gemini://gemini.circumlunar.space/docs/specification.gmi Gemini Specifications3
+=> https://datatracker.ietf.org/doc/html/rfc9000 QUIC RFC
+
+## Rationale
+
+This specification attempts to reduce the latency of accessing gemini sites, both over congested or lossy links, as well as accessing additional gemini pages on the same server.
+
+Currently Gemini closes the connection after every response, meaning that for each following request a new connection has to be established.
+
+## Implementation
+
+After establishing a QUIC connection according to RFC9000, the client shall open bidirectional channels for every request.
+Each bidirectional channel is used for a single gemini request and response.
+
+## Server/Client requirements
+
+There is no minimum amount of bidirectional channels that is required to be supported by servers or clients. If the client exceeds the implementation-defined limit of simultaneous bidirectional channels, the server shall send a "44 SLOW DOWN" response with a retry duration of 0 seconds.
+
+The client is required to handle the slow down for 0s response by reducing the number of concurrent connections. This could be achieved by keeping track of how many channels were open simultaneously vs how many have failed with a "44" error.
+

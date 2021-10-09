@@ -4,15 +4,18 @@
 #![forbid(unsafe_code)]
 
 use anyhow::Result;
-use tracing::info;
+use tracing::{error, info};
 use tracing_subscriber::{
     fmt::time::ChronoUtc, prelude::__tracing_subscriber_SubscriberExt, util::SubscriberInitExt,
     Layer,
 };
 
+mod gemini;
+
 #[tracing::instrument]
 async fn run() -> Result<()> {
     info!("Starting up...");
+    gemini::run_gemini().await?;
     Ok(())
 }
 
@@ -66,7 +69,7 @@ async fn main() -> Result<()> {
 
     if let Err(ref e) = result {
         sentry::integrations::anyhow::capture_anyhow(e);
-        eprintln!("{:?}", e);
+        error!("{:?}", e);
     }
 
     Ok(())
