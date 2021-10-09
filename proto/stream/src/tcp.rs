@@ -41,7 +41,7 @@ where
     pub async fn accept(self: Arc<Self>) -> Result<JoinHandle<()>> {
         let (socket, addr) = self.listener.accept().await?;
         Ok(tokio::spawn(async move {
-            if let Err(e) = self.handle_connection(socket, addr.ip()).await {
+            if let Err(e) = self.handle_connection(socket, addr.ip(), None).await {
                 sentry_anyhow::capture_anyhow(&e);
                 error!("{:?}", e);
             }
@@ -61,10 +61,17 @@ where
     H: ConnectionHandler + ?Sized + Send + Sync,
 {
     #[tracing::instrument(skip(self, stream))]
-    async fn handle_connection<RW>(&self, stream: RW, remote_addr: IpAddr) -> Result<()>
+    async fn handle_connection<RW>(
+        &self,
+        stream: RW,
+        remote_addr: IpAddr,
+        alpn: Option<Vec<u8>>,
+    ) -> Result<()>
     where
-        RW: AsyncRead + AsyncReadExt + AsyncWrite + AsyncWriteExt + Unpin + Send + Sync,
+        RW: AsyncRead + AsyncReadExt + AsyncWrite + AsyncWriteExt + Unpin + Send + Sync + 'static,
     {
-        self.inner.handle_connection(stream, remote_addr).await
+        self.inner
+            .handle_connection(stream, remote_addr, alpn)
+            .await
     }
 }

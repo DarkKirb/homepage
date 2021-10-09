@@ -2,6 +2,7 @@
 members = [
     "homepage",
     "proto/gemini",
+    "proto/http",
     "proto/stream",
     "router"
 ]

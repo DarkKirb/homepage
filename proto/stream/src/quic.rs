@@ -113,13 +113,15 @@ where
         self: Arc<Self>,
         stream: RW,
         remote_addr: SocketAddr,
+        protocol: Option<Vec<u8>>,
     ) -> Result<JoinHandle<()>>
     where
         RW: AsyncRead + AsyncReadExt + AsyncWrite + AsyncWriteExt + Unpin + Send + Sync + 'static,
     {
         Ok(tokio::spawn(async move {
             let res = || async {
-                self.handle_connection(stream, remote_addr.ip()).await?;
+                self.handle_connection(stream, remote_addr.ip(), protocol)
+                    .await?;
                 Ok(())
             };
             if let Err(e) = res().await {
@@ -130,9 +132,10 @@ where
     }
     async fn handle_quic_connection(
         self: Arc<Self>,
-        connecting: Connecting,
+        mut connecting: Connecting,
     ) -> Result<JoinHandle<()>> {
         let remote_addr = connecting.remote_address();
+        let protocol = connecting.handshake_data().await?.protocol;
         Ok(tokio::spawn(async move {
             let res = || async {
                 let mut conn = connecting.await?;
@@ -146,6 +149,7 @@ where
                                 w: item.0,
                             },
                             remote_addr,
+                            protocol.clone(),
                         )
                         .await?;
                 }
@@ -172,10 +176,17 @@ where
     H: ConnectionHandler + Send + Sync + ?Sized,
 {
     #[tracing::instrument(skip(self, stream))]
-    async fn handle_connection<RW>(&self, stream: RW, remote_addr: IpAddr) -> Result<()>
+    async fn handle_connection<RW>(
+        &self,
+        stream: RW,
+        remote_addr: IpAddr,
+        alpn: Option<Vec<u8>>,
+    ) -> Result<()>
     where
-        RW: AsyncRead + AsyncReadExt + AsyncWrite + AsyncWriteExt + Unpin + Send + Sync,
+        RW: AsyncRead + AsyncReadExt + AsyncWrite + AsyncWriteExt + Unpin + Send + Sync + 'static,
     {
-        self.inner.handle_connection(stream, remote_addr).await
+        self.inner
+            .handle_connection(stream, remote_addr, alpn)
+            .await
     }
 }

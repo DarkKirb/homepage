@@ -20,6 +20,7 @@ rustls-pemfile = "0.2.1"
 rustls = "0.19.0"
 quinn = "0.7.2"
 router = {path = "../router"}
+proto_http = {path = "../proto/http"}
 
 [dependencies.tokio]
 version = "1.12.0"

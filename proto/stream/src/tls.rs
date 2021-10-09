@@ -6,7 +6,10 @@ use anyhow::Result;
 use async_trait::async_trait;
 
 use tokio::io::{AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt};
-use tokio_rustls::{rustls::ServerConfig, TlsAcceptor};
+use tokio_rustls::{
+    rustls::{ServerConfig, Session},
+    TlsAcceptor,
+};
 
 use super::ConnectionHandler;
 
@@ -36,11 +39,23 @@ where
     H: ConnectionHandler + ?Sized + Send + Sync,
 {
     #[tracing::instrument(skip(self, stream))]
-    async fn handle_connection<RW>(&self, stream: RW, remote_addr: IpAddr) -> Result<()>
+    async fn handle_connection<RW>(
+        &self,
+        stream: RW,
+        remote_addr: IpAddr,
+        orig_proto: Option<Vec<u8>>,
+    ) -> Result<()>
     where
-        RW: AsyncRead + AsyncReadExt + AsyncWrite + AsyncWriteExt + Unpin + Send + Sync,
+        RW: AsyncRead + AsyncReadExt + AsyncWrite + AsyncWriteExt + Unpin + Send + Sync + 'static,
     {
         let acceptor = self.acceptor.accept(stream).await?;
-        self.inner.handle_connection(acceptor, remote_addr).await
+        let server_session = acceptor.get_ref().1;
+        let protocol = server_session
+            .get_alpn_protocol()
+            .map(|v| v.to_owned())
+            .or(orig_proto);
+        self.inner
+            .handle_connection(acceptor, remote_addr, protocol)
+            .await
     }
 }

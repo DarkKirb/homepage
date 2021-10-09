@@ -1,13 +1,11 @@
 use std::{
     fs::File,
     io::{BufReader, Seek, SeekFrom},
-    net::SocketAddr,
     sync::Arc,
 };
 
 use anyhow::Result;
-use proto_stream::{quic::QuicHandler, tcp::TcpHandler, tls::TlsHandler, ConnectionHandler};
-use quinn::Endpoint;
+use proto_stream::{tcp::TcpHandler, tls::TlsHandler, ConnectionHandler};
 use router::Router;
 use rustls::{
     ciphersuite::{
@@ -26,14 +24,14 @@ static CIPHERSUITES: [&SupportedCipherSuite; 3] = [
 ];
 
 #[tracing::instrument]
-pub async fn run_gemini(service: Arc<Router>) -> Result<()> {
-    info!("Starting up gemini server...");
-    let server = Arc::new(proto_gemini::Server::new(service));
-    let tls_server = tokio::spawn(run_gemini_tls(Arc::clone(&server)));
-    let quic_server = tokio::spawn(run_gemini_quic(Arc::clone(&server)));
-    let (tls_server, quic_server) = tokio::try_join!(tls_server, quic_server)?;
+pub async fn run_http(service: Arc<Router>) -> Result<()> {
+    info!("Starting up HTTP server...");
+    let server = Arc::new(proto_http::Server::new(service));
+    let tcp_server = tokio::spawn(run_http_tcp(Arc::clone(&server)));
+    let tls_server = tokio::spawn(run_http_tls(Arc::clone(&server)));
+    let (tcp_server, tls_server) = tokio::try_join!(tcp_server, tls_server)?;
+    tcp_server?;
     tls_server?;
-    quic_server?;
     Ok(())
 }
 
@@ -64,7 +62,19 @@ async fn async_read_keys() -> Result<(PrivateKey, Vec<Certificate>)> {
 }
 
 #[tracing::instrument(skip(handler))]
-async fn run_gemini_tls<C>(handler: C) -> Result<()>
+async fn run_http_tcp<C>(handler: C) -> Result<()>
+where
+    C: ConnectionHandler + Send + Sync + 'static,
+{
+    info!("Listening for HTTP connections on port 3002");
+    Arc::new(TcpHandler::new("0.0.0.0:3002", handler).await?)
+        .listen()
+        .await?;
+    Ok(())
+}
+
+#[tracing::instrument(skip(handler))]
+async fn run_http_tls<C>(handler: C) -> Result<()>
 where
     C: ConnectionHandler + Send + Sync + 'static,
 {
@@ -73,41 +83,18 @@ where
 
     server_config.set_persistence(ServerSessionMemoryCache::new(128));
     server_config.set_single_cert(certs, privkey)?;
-    server_config.set_protocols(&[b"gemini".to_vec()]);
+    server_config.set_protocols(&[b"h2".to_vec(), b"http/1.1".to_vec()]);
 
-    info!("Listening for gemini connections on port 1965");
+    info!("Listening for HTTPS connections on port 3003");
     Arc::new(
         TcpHandler::new(
-            "0.0.0.0:1965",
+            "0.0.0.0:3003",
             TlsHandler::new(Arc::new(server_config), handler).await?,
         )
         .await?,
     )
     .listen()
     .await?;
-
-    Ok(())
-}
-
-#[tracing::instrument(skip(handler))]
-async fn run_gemini_quic<C>(handler: C) -> Result<()>
-where
-    C: ConnectionHandler + Send + Sync + 'static,
-{
-    let (privkey, certs) = async_read_keys().await?;
-    let socket_addr: SocketAddr = "0.0.0.0:1965".parse()?;
-
-    info!("Listening for QUIC gemini connections on port 1965");
-    let mut server = quinn::ServerConfig::default();
-    server.certificate(certs.into(), quinn::PrivateKey::from_der(&privkey.0)?)?;
-
-    let mut endpoint_builder = Endpoint::builder();
-    endpoint_builder.listen(server);
-    let (_endpoint, incoming) = endpoint_builder.bind(&socket_addr)?;
-
-    Arc::new(QuicHandler::new(incoming, handler).await?)
-        .listen()
-        .await?;
 
     Ok(())
 }

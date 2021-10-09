@@ -2,7 +2,7 @@
 //!
 //! This crate implements the plain-text part of the gemini protocol
 
-use std::{marker::PhantomData, net::IpAddr};
+use std::{marker::PhantomData, net::IpAddr, sync::Arc};
 
 use anyhow::Result;
 use async_trait::async_trait;
@@ -39,6 +39,17 @@ where
     R: AsyncRead + AsyncReadExt + Unpin,
 {
     async fn handle(&self, url: Url, remote_addr: IpAddr) -> Result<Response<R>>;
+}
+
+#[async_trait]
+impl<R, T> Service<R> for Arc<T>
+where
+    R: AsyncRead + AsyncReadExt + Unpin,
+    T: Service<R> + Send + Sync,
+{
+    async fn handle(&self, url: Url, remote_addr: IpAddr) -> Result<Response<R>> {
+        (**self).handle(url, remote_addr).await
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Default)]
@@ -78,7 +89,12 @@ where
     R: AsyncRead + AsyncReadExt + Unpin + Send + Sync,
 {
     #[tracing::instrument(skip(self, stream))]
-    async fn handle_connection<RW>(&self, mut stream: RW, remote_addr: IpAddr) -> Result<()>
+    async fn handle_connection<RW>(
+        &self,
+        mut stream: RW,
+        remote_addr: IpAddr,
+        _: Option<Vec<u8>>,
+    ) -> Result<()>
     where
         RW: AsyncRead + AsyncReadExt + AsyncWrite + AsyncWriteExt + Unpin + Send + Sync,
     {
