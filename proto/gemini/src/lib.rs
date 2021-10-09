@@ -11,6 +11,8 @@ use tokio::io::{AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt};
 use tracing::{error, info, warn};
 use url::Url;
 
+mod router;
+
 /// Validates an URL according to 1.2 Gemini Spec
 ///
 /// In particular it checks whether the scheme is "gemini", that it has an 'authority' component and that username and password are not set
@@ -32,7 +34,7 @@ fn is_valid_gemini_url(url: &Url) -> bool {
 }
 
 #[async_trait]
-pub trait Service<R>: Send + Sync
+pub trait Service<R>
 where
     R: AsyncRead + AsyncReadExt + Unpin,
 {
@@ -72,7 +74,7 @@ fn rstrip(mut buf: &[u8]) -> &[u8] {
 #[async_trait]
 impl<S, R> ConnectionHandler for Server<S, R>
 where
-    S: Service<R>,
+    S: Service<R> + Send + Sync,
     R: AsyncRead + AsyncReadExt + Unpin + Send + Sync,
 {
     #[tracing::instrument(skip(self, stream))]
@@ -102,7 +104,7 @@ where
 #[async_trait]
 impl<S, R> Service<R> for Server<S, R>
 where
-    S: Service<R>,
+    S: Service<R> + Send + Sync,
     R: AsyncRead + AsyncReadExt + Unpin + Send + Sync,
 {
     #[tracing::instrument(skip(self))]

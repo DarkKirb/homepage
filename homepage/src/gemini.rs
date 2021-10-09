@@ -10,6 +10,7 @@ use async_trait::async_trait;
 use proto_gemini::{Response, Service};
 use proto_stream::{quic::QuicHandler, tcp::TcpHandler, tls::TlsHandler, ConnectionHandler};
 use quinn::Endpoint;
+use router::Router;
 use rustls::{
     ciphersuite::{
         TLS13_AES_128_GCM_SHA256, TLS13_AES_256_GCM_SHA384, TLS13_CHACHA20_POLY1305_SHA256,
@@ -27,24 +28,11 @@ static CIPHERSUITES: [&SupportedCipherSuite; 3] = [
     &TLS13_AES_128_GCM_SHA256,
 ];
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-struct GeminiTest;
-
-#[async_trait]
-impl Service<Cursor<Vec<u8>>> for GeminiTest {
-    #[tracing::instrument]
-    async fn handle(&self, _: Url, _: IpAddr) -> Result<Response<Cursor<Vec<u8>>>> {
-        Ok(Response::Success(
-            "text/gemini".to_string(),
-            Cursor::new(b"Hewwo!!!\n".to_vec()),
-        ))
-    }
-}
-
 #[tracing::instrument]
 pub async fn run_gemini() -> Result<()> {
     info!("Starting up gemini server...");
-    let service = GeminiTest;
+    let service = Router::new();
+    service.add_default_routes().await?;
     let server = Arc::new(proto_gemini::Server::new(service));
     let tls_server = tokio::spawn(run_gemini_tls(Arc::clone(&server)));
     let quic_server = tokio::spawn(run_gemini_quic(Arc::clone(&server)));

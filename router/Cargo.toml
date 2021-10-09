@@ -1,0 +1,15 @@
+[package]
+name = "router"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+regex = "1.5.4"
+url = "2.2.2"
+async-trait = "0.1.51"
+tokio = {version = "1.12.0", features = ["sync"]}
+anyhow = "1.0.44"
+tracing = "0.1.29"
+tracing-futures = "0.2.5"

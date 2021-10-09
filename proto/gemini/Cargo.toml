@@ -14,3 +14,5 @@ tracing = "0.1.29"
 tracing-futures = "0.2.5"
 sentry-anyhow = "0.23.0"
 proto_stream = {path = "../stream"}
+router = {path = "../../router"}
+parking_lot = "0.11.2"
