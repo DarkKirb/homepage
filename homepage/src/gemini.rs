@@ -21,7 +21,7 @@ use rustls_pemfile::{pkcs8_private_keys, rsa_private_keys};
 use tracing::info;
 use url::Url;
 
-static CIPHERSUITES: [&'static SupportedCipherSuite; 3] = [
+static CIPHERSUITES: [&SupportedCipherSuite; 3] = [
     &TLS13_CHACHA20_POLY1305_SHA256,
     &TLS13_AES_256_GCM_SHA384,
     &TLS13_AES_128_GCM_SHA256,
@@ -46,27 +46,11 @@ pub async fn run_gemini() -> Result<()> {
     info!("Starting up gemini server...");
     let service = GeminiTest;
     let server = Arc::new(proto_gemini::Server::new(service));
-    let tcp_server = tokio::spawn(run_gemini_tcp(Arc::clone(&server)));
     let tls_server = tokio::spawn(run_gemini_tls(Arc::clone(&server)));
     let quic_server = tokio::spawn(run_gemini_quic(Arc::clone(&server)));
-    let (tcp_server, tls_server, quic_server) =
-        tokio::try_join!(tcp_server, tls_server, quic_server)?;
-    tcp_server?;
+    let (tls_server, quic_server) = tokio::try_join!(tls_server, quic_server)?;
     tls_server?;
     quic_server?;
-    Ok(())
-}
-
-#[tracing::instrument(skip(handler))]
-async fn run_gemini_tcp<C>(handler: C) -> Result<()>
-where
-    C: ConnectionHandler + Send + Sync + 'static,
-{
-    info!("Listening for unencrypted gemini connections on port 1966");
-    Arc::new(TcpHandler::new("0.0.0.0:1966", handler).await?)
-        .listen()
-        .await?;
-
     Ok(())
 }
 
