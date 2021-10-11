@@ -1,7 +1,4 @@
-//! Gemini Protocol Support
-//!
-//! This crate implements the plain-text part of the gemini protocol
-
+//! Gemini Protocol Implementation
 use std::{marker::PhantomData, net::IpAddr, sync::Arc};
 
 use anyhow::Result;
@@ -13,9 +10,6 @@ use url::Url;
 
 mod router;
 
-/// Validates an URL according to 1.2 Gemini Spec
-///
-/// In particular it checks whether the scheme is "gemini", that it has an 'authority' component and that username and password are not set
 fn is_valid_gemini_url(url: &Url) -> bool {
     if url.scheme() != "gemini" {
         return false;
@@ -33,11 +27,20 @@ fn is_valid_gemini_url(url: &Url) -> bool {
     true
 }
 
+/// Gemini Service Trait
 #[async_trait]
 pub trait Service<R>
 where
     R: AsyncRead + AsyncReadExt + Unpin,
 {
+    /// Handle a Gemini Service Request
+    ///
+    /// # Arguments
+    /// - `url` - Requested URL
+    /// - `remote_addr` - Address of peer
+    ///
+    /// # Errors
+    /// This function returns an error if handling a request fails
     async fn handle(&self, url: Url, remote_addr: IpAddr) -> Result<Response<R>>;
 }
 
@@ -52,6 +55,7 @@ where
     }
 }
 
+/// Gemini Server
 #[derive(Clone, Debug, PartialEq, Eq, Default)]
 pub struct Server<S, R>
 where
@@ -67,6 +71,7 @@ where
     S: Service<R>,
     R: AsyncRead + AsyncReadExt + Unpin + Send + Sync,
 {
+    /// Create a new Gemini Server from a [`Service`]
     pub fn new(service: S) -> Self {
         Self {
             _phantom: PhantomData,
@@ -98,7 +103,7 @@ where
     where
         RW: AsyncRead + AsyncReadExt + AsyncWrite + AsyncWriteExt + Unpin + Send + Sync,
     {
-        let mut buffer = vec![0u8; 1026];
+        let mut buffer = vec![0_u8; 1026];
         let req_len = stream.read(&mut buffer).await?;
         let req = rstrip(&buffer[..req_len]);
         let url_result = (|| Ok(Url::parse(std::str::from_utf8(req)?)?))();
@@ -142,7 +147,7 @@ where
     }
 }
 
-/// Possible Responses to a gemini request
+/// Gemini Response
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Response<R>
 where
@@ -176,16 +181,21 @@ where
     Gone,
     /// Proxy Service Refused
     ProxyServiceRefused,
+    /// Client made a bad request
     BadRequest,
 }
 
 impl<R> Response<R>
 where
-    R: AsyncRead + Unpin + AsyncReadExt,
+    R: AsyncRead + Unpin + AsyncReadExt + Send,
 {
+    /// Write a gemini response to an Async writer
+    ///
+    /// # Errors
+    /// This function returns an error if writing to the writer failed
     pub async fn write<W>(self, mut writer: W) -> Result<()>
     where
-        W: AsyncWrite + AsyncWriteExt + Unpin,
+        W: AsyncWrite + AsyncWriteExt + Unpin + Send,
     {
         match self {
             Response::Input(prompt) => {

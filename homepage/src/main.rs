@@ -1,6 +1,5 @@
-//! Main Entrypoint for darkkirb.de
-//!
-//! This crate serves as the main entry point for darkkirb.de and mostly just sets up all of the components of the website
+//! darkkirb.de homepage backend crate
+
 #![forbid(unsafe_code)]
 
 use std::sync::Arc;
@@ -15,17 +14,20 @@ use tracing_subscriber::{
 
 mod gemini;
 mod http;
+mod ssl;
+
+use sentry_anyhow as _;
 
 #[tracing::instrument]
 async fn run() -> Result<()> {
     info!("Starting up...");
     let service = Arc::new(Router::new());
-    service.add_default_routes().await?;
-    let gemini = tokio::spawn(gemini::run_gemini(Arc::clone(&service)));
-    let http = tokio::spawn(http::run_http(service));
-    let (gemini, http) = tokio::try_join!(gemini, http)?;
-    gemini?;
-    http?;
+    service.add_default_routes().await;
+    tokio::select!(
+        gemini = tokio::spawn(gemini::run_gemini(Arc::clone(&service))) => {gemini?}
+        http = tokio::spawn(http::run_http(service)) => {http?}
+    )?;
+
     Ok(())
 }
 
@@ -60,13 +62,14 @@ async fn main() -> Result<()> {
             .try_init()?;
     }
 
+    #[allow(clippy::useless_transmute)] // Issue in external macro
     let _guard = sentry::init((
         std::env::var("SENTRY_DSN").ok(),
         sentry::ClientOptions {
             release: sentry::release_name!(),
             attach_stacktrace: true,
             debug: true,
-            ..Default::default()
+            ..sentry::ClientOptions::default()
         }
         .add_integration(sentry::integrations::backtrace::AttachStacktraceIntegration::new())
         .add_integration(sentry::integrations::backtrace::ProcessStacktraceIntegration::new())

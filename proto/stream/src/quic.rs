@@ -1,3 +1,14 @@
+//! QUIC Support
+//!
+//! This module exposes QUIC support for the Streams subsystem and is based on the [quinn](https://crates.io/crates/quinn) crate.
+//!
+//! This API comes with a few limitations, since the Stream API is deliberately simple as possible. These are:
+//!
+//! 1. No unidirectional stream or datagram support
+//! 2. Explicit client-server differentiation which does not exist in QUIC (only the client can open a bidirectional stream)
+//!
+//! Each bidirectional stream the client opens is treated like a complete connection, and the actual QUIC connection is not forwarded to the [`ConnectionHandler`]
+
 use std::{
     io::IoSlice,
     net::{IpAddr, SocketAddr},
@@ -84,6 +95,7 @@ where
     }
 }
 
+/// [`ConnectionHandler`] for QUIC connections
 #[derive(Debug)]
 pub struct QuicHandler<H>
 where
@@ -97,6 +109,15 @@ impl<H> QuicHandler<H>
 where
     H: ConnectionHandler + Send + Sync,
 {
+    /// Creates a new `QuicHandler`
+    ///
+    /// # Arguments
+    /// - `incoming`: [`Incoming`] created by binding to a QUIC socket
+    /// - `inner`: The [`ConnectionHandler`] to hand established bidirectional streams to
+    ///
+    /// # Errors
+    /// The function may return errors if it detects that the `incoming` instance is configured wrong.
+    /// Currently it does not check for anything.
     pub async fn new(incoming: Incoming, inner: H) -> Result<Self> {
         Ok(Self {
             incoming: Mutex::new(incoming),
@@ -162,6 +183,10 @@ where
             }
         }))
     }
+    /// Listen for connection on the current task
+    ///
+    /// # Errors
+    /// This function will return an error if accepting a QUIC connection fails
     pub async fn listen(self: Arc<Self>) -> Result<()> {
         while let Some(item) = self.incoming.lock().await.next().await {
             Arc::clone(&self).handle_quic_connection(item).await?;

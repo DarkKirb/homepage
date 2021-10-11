@@ -1,7 +1,7 @@
 [package]
 name = "proto_stream"
 version = "0.1.0"
-edition = "2021"
+edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -9,8 +9,7 @@ edition = "2021"
 anyhow = "1.0.44"
 async-trait = "0.1.51"
 tracing = "0.1.29"
-tracing-futures = "0.2.5"
-tokio = {version = "1.12.0", features = ["rt", "io-util", "net", "sync"] }
+tokio = { version = "1.12.0", features = ["rt", "io-util", "net", "sync"] }
 sentry-anyhow = "0.23.0"
 tokio-rustls = "0.22.0"
 quinn = "0.7.2"

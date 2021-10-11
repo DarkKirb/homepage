@@ -1,4 +1,4 @@
-//! HTTP 1/2 support
+//! HTTP Protocol support
 
 use std::{
     convert::Infallible,
@@ -25,6 +25,7 @@ use tracing::{error, info};
 
 mod router;
 
+/// type-erased [`AsyncRead`] to [`HttpBody`] bridge
 #[pin_project]
 pub struct AsyncBody {
     #[pin]
@@ -42,10 +43,11 @@ impl std::fmt::Debug for AsyncBody {
 }
 
 impl AsyncBody {
+    /// Creates a new async body from an async reader
     pub fn new(inner: impl AsyncRead + Unpin + Send + Sync + 'static) -> Self {
         Self {
             inner: Box::new(inner),
-            read_buf_owned: vec![0u8; 65536],
+            read_buf_owned: vec![0_u8; 65536],
         }
     }
 }
@@ -59,8 +61,8 @@ impl HttpBody for AsyncBody {
         self: Pin<&mut Self>,
         cx: &mut Context<'_>,
     ) -> Poll<Option<Result<Self::Data, Self::Error>>> {
-        let mut this = self.project();
-        let mut read_buf = ReadBuf::new(&mut this.read_buf_owned);
+        let this = self.project();
+        let mut read_buf = ReadBuf::new(this.read_buf_owned);
         match this.inner.poll_read(cx, &mut read_buf) {
             Poll::Ready(Err(e)) => Poll::Ready(Some(Err(e.into()))),
             Poll::Pending => Poll::Pending,
@@ -82,8 +84,14 @@ impl HttpBody for AsyncBody {
     }
 }
 
+/// HTTP Service
 #[async_trait]
 pub trait Service {
+    /// Handle HTTP request
+    ///
+    /// # Arguments
+    /// - `remote_addr` - IP Address of Peer, with proxy headers fully resolved
+    /// - `request` - The request header and body
     async fn handle(
         &self,
         remote_addr: IpAddr,
@@ -105,6 +113,7 @@ where
     }
 }
 
+/// HTTP Server
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Server<S>
 where
@@ -117,6 +126,10 @@ impl<S> Server<S>
 where
     S: Service,
 {
+    /// Create a new HTTP server
+    ///
+    /// # Arguments
+    /// - `service` - Service to service requests with
     pub fn new(service: S) -> Self {
         Self {
             inner: Arc::new(service),

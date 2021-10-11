@@ -1,4 +1,6 @@
-//! TCP Connection Handling code
+//! TCP Support
+//!
+//! This module exposes TCP connections and is a thin wrapper around [`TcpListener`]
 
 use std::{net::IpAddr, sync::Arc};
 
@@ -12,6 +14,7 @@ use tokio::{
 };
 use tracing::error;
 
+/// [`ConnectionHandler`] for TCP
 #[derive(Debug)]
 pub struct TcpHandler<H>
 where
@@ -25,7 +28,15 @@ impl<H> TcpHandler<H>
 where
     H: ConnectionHandler + Send + Sync,
 {
-    pub async fn new(addrs: impl ToSocketAddrs, inner: H) -> Result<Self> {
+    /// Creates a new `TcpListener` instance
+    ///
+    /// # Arguments
+    /// - `addrs` - Socket Address to listen on
+    /// - `inner` - [`ConnectionHandler`] to hand connections to
+    ///
+    /// # Errors
+    /// This function will return an error when [`TcpListener::bind`] returns an error.
+    pub async fn new(addrs: impl ToSocketAddrs + Send + Sync, inner: H) -> Result<Self> {
         Ok(Self {
             listener: TcpListener::bind(addrs).await?,
             inner,
@@ -37,6 +48,10 @@ impl<H> TcpHandler<H>
 where
     H: ConnectionHandler + Send + Sync + ?Sized + 'static,
 {
+    /// Accepts a single TCP connection and spawns a [`ConnectionHandler`] task
+    ///
+    /// # Errors
+    /// This function will return an error if accepting a connection failed.
     #[tracing::instrument(skip(self))]
     pub async fn accept(self: Arc<Self>) -> Result<JoinHandle<()>> {
         let (socket, addr) = self.listener.accept().await?;
@@ -48,6 +63,10 @@ where
         }))
     }
 
+    /// Listens on the TCP Socket indefinitely
+    ///
+    /// # Errors
+    /// This function will return an error if accepting a connection failed
     pub async fn listen(self: Arc<Self>) -> Result<()> {
         loop {
             Arc::clone(&self).accept().await?;

@@ -1,3 +1,5 @@
+//! Routes used by the darkkirb.de domain
+
 use std::io::Cursor;
 
 use anyhow::Result;

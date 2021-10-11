@@ -11,11 +11,7 @@ use router::Router;
 #[async_trait]
 impl Service for Router {
     #[tracing::instrument]
-    async fn handle(
-        &self,
-        remote_addr: IpAddr,
-        req: Request<Body>,
-    ) -> Result<hyper::Response<AsyncBody>> {
+    async fn handle(&self, remote_addr: IpAddr, req: Request<Body>) -> Result<Response<AsyncBody>> {
         let uri = req.uri().clone();
         let uri_string = if uri.host().is_none() {
             format!("http://localhost{}", uri.to_string())
@@ -31,7 +27,7 @@ impl Service for Router {
             router::Response::NotFound => Response::builder()
                 .status(404)
                 .body(AsyncBody::new(Cursor::new(b"File not Found")))?,
-            router::Response::ServerError => Response::builder()
+            _ => Response::builder()
                 .status(500)
                 .body(AsyncBody::new(Cursor::new(b"Internal Server Error")))?,
         };
