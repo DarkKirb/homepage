@@ -7,14 +7,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: archlinux:latest
     steps:
+      - run: pacman --noconfirm -Syu
+      - run: pacman --noconfirm -S libjxl git nodejs npm imagemagick libwebp libavif libheif
+      - run: npm install -g yarn
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # If your repository depends on submodule, please see: https://github.com/actions/checkout
-          submodules: recursive
-      - run: sudo apt update -yy
-      - run: sudo apt install -yy jpeg-xl
       - name: Use Node.js 20.x
         uses: actions/setup-node@v2
         with:
