@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="<%= __("lang.code") %>">
+
+<head>
+  <meta charset="utf-8">
+  <script>
+    (function() {
+      var theme = localStorage.getItem("theme");
+      if (theme) document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+
+  <%
+            var title = __("title.basic", page.title);
+            if(is_archive()) {
+                if(is_month()) {
+                    title = __("title.archive.month", page.year, page.month);
+                } else if (is_year()) {
+                    title = __("title.archive.year", page.year);
+                } else {
+                    title = __("title.archive.generic");
+                }
+            } else if (is_category()) {
+                title = __("title.category", page.category);
+            } else if (is_tag()) {
+                title = __("title.tag", page.tag);
+            }
+            if (!page.title) {
+                title = __("title.homepage");
+            }
+        %>
+  <title><%= title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <%- open_graph({}) %>
+  <%- feed_tag() %>
+  <%- css({href: 'css/style'}) %>
+</head>
+
+<body>
+  <div class="container">
+    <a class="visually-hidden-focusable" href="#main"><%= __("accessibility.jump_content") %></a>
+    <header>
+      <hgroup>
+        <h1> <%= __("title.homepage") %> </h1>
+        <p> <%= __("title.homepageTagline") %> </p>
+      </hgroup>
+    </header>
+    <nav id="top-nav">
+      <input class="visually-hidden" type="checkbox" id="settings-menu-checkbox" aria-hidden="true" tabindex="-1">
+      <label class="hamburger" for="settings-menu-checkbox" title="<%= __("settings.menuName") %>" aria-hidden="true"><%- fa_inline('cog') %></label>
+      <ul style="display: flex">
+        <li><a href="/"><%= __("page.homepage") %></a></li>
+        <li><a><%= __("page.blog") %></a></li>
+        <li><a><%= __("page.chat") %></a></li>
+      </ul>
+      <div id="settings-menu">
+        <p><%= __("settings.settingsNotice") %></p>
+        <label for="change-theme"><%= __("settings.changeTheme") %></label>
+        <br>
+        <select id="change-theme">
+          <option value="auto"><%= __("theme.auto") %></option>
+          <option value="sunset"><%= __("theme.sunset") %></option>
+          <option value="black"><%= __("theme.black") %></option>
+          <option value="light"><%= __("theme.light") %></option>
+          <option value="white"><%= __("theme.white") %></option>
+        </select>
+      </div>
+    </nav>
+    <main id="main" role="main">
+      <%- body %>
+    </main>
+    <footer>
+      <%= __("footer", date(new Date(), 'YYYY')) %>
+    </footer>
+  </div>
+  <%- js({src: "js/theme-picker.js", async: true}) %>
+</body>
+
+</html>
