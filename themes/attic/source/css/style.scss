@@ -107,6 +107,42 @@ header {
 
 option,
 optgroup {
-  
   background: var(--background-color);
+}
+
+@media (min-width: 576px) {
+  .pfpfig {
+    max-width: 256px;
+  }
+}
+
+@media (max-width: 576px) {
+  .pfpfig {
+    max-width: 25%;
+  }
+  .pfpfig > picture > img {
+    width: 100%;
+  }
+  .pfpfig > figcaption {
+    display: none;
+  }
+}
+
+.pfpfig {
+  margin-bottom: 1rem;
+  float: left;
+  margin-right: 1rem;
+}
+
+// Mixin itself
+@mixin clearfix() {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+.clearfix {
+  @include clearfix();
 }
