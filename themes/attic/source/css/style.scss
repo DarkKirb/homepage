@@ -146,3 +146,11 @@ optgroup {
 .clearfix {
   @include clearfix();
 }
+
+article {
+  background-color: var(--background-translucent);
+  border: 1px solid var(--article-border-color);
+  border-radius: 1rem;
+  box-shadow: 0 1px 5px 0 var(--background-translucent);
+  padding: 1rem;
+}

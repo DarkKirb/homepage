@@ -10,6 +10,8 @@
   --font-weight: 400;
   --font-size: 16px;
 
+  --article-border-color: var(--background-color);
+
   // Texts colors
   --color: var(--foreground-color);
   --h1-color: var(--foreground-color);
@@ -263,14 +265,16 @@ kbd {
   --background-color: #{$white};
   --foreground-color: #{$black};
 
+  --background-translucent: #ffffff20;
+
   // Muted colors
   --muted-color: #{$grey-700};
   --muted-border-color: #{$grey-500};
 
   // Primary colors
-  --primary: #{$primary-600};
-  --primary-hover: #{$primary-700};
-  --primary-focus: #{rgba($primary-600, 0.125)};
+  --primary: #{$primary-800};
+  --primary-hover: #{$primary-900};
+  --primary-focus: #{rgba($primary-800, 0.125)};
   --primary-inverse: #{$white};
 
   // Secondary colors
@@ -444,6 +448,7 @@ kbd {
 @mixin dark {
   --background-color: #{$black};
   --foreground-color: #{$white};
+  --background-translucent: #00000020;
 
   // Muted colors
   --muted-color: #{$grey-200};
@@ -653,6 +658,7 @@ a,
   --primary: var(--foreground-color) !important;
   --primary-hover: var(--foreground-color) !important;
   --primary-focus: var(--foreground-color) !important;
+  --article-border-color: var(--foreground-color) !important;
 }
 
 @media (prefers-contrast: more) {

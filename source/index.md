@@ -40,7 +40,7 @@ My pronouns are <span class="p-pronoun">it/its</span>, <span class="p-pronoun">r
     <div>
         <h2>Index</h2>
         <ul>
-            <li class="hidden"><a class="u-url u-uid" href="https://lotte.chir.rs" rel="me">https://lotte.chir.rs</a></li>
+            <li style="display:none"><a class="u-url u-uid" href="https://lotte.chir.rs" rel="me">https://lotte.chir.rs</a></li>
             <li class="u-url"><a href="https://lotte.chir.rs/blog/">Blog</a></li>
             <li class="u-url"><a href="https://git.chir.rs">Forgejo</a></li>
             <li class="u-url"><a href="https://akko.chir.rs/">Akkoma (open reg)</a></li>
