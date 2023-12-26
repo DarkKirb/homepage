@@ -1,0 +1,28 @@
+lang:
+  code: en
+title:
+  archive:
+    month: "Archive: %d / %d | Lotte’s Attic"
+    year: "Archive: %d | Lotte’s Attic"
+    generic: Archive | Lotte’s Attic"
+  category: "Category: %d | Lotte’s Attic"
+  tag: "Tag: %d | Lotte’s Attic"
+  basic: "%s | Lotte’s Attic"
+  homepage: "Lotte’s Attic"
+  homepageTagline: Raccoons? On the internet? It’s more likely than you think!
+accessibility:
+  jump_content: Jump to content…
+page:
+  homepage: Homepage
+  blog: Blog
+  chat: Chat
+settings:
+  settingsNotice: We use cookies to store the settings you select here. Please be advised that if the automatic theme is a light theme and you change it to a dark one, there may be a flash of a white screen on slow devices, especially with animations disabled.
+  changeTheme: "Theme:"
+theme:
+  auto: Automatic Theme
+  sunset: Sunset (default dark theme)
+  black: Black Theme (high contrast)
+  light: Trans Rights (default light theme)
+  white: White Theme (high contrast)
+footer: Copyright © %s Charlotte 🦝 Raccoon. Powered by Hexo.

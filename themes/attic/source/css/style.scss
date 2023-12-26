@@ -1,0 +1,112 @@
+/*!
+ * Pico CSS v1.5.10 (https://picocss.com)
+ * Copyright 2019-2023 - Licensed under MIT
+ */
+
+body {
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-image: var(--background-image);
+}
+
+// Config
+@import "@picocss/pico/scss/variables";
+
+@import "theme";
+
+// Theming
+//@import "@picocss/pico/scss/themes/default";
+
+// Layout
+@import "@picocss/pico/scss/layout/document"; // html
+@import "@picocss/pico/scss/layout/sectioning"; // body, header, main, footer
+@import "@picocss/pico/scss/layout/container"; // .container, .container-fluid
+// @import "@picocss/pico/scss/layout/section"; // section
+// @import "@picocss/pico/scss/layout/grid"; // .grid
+// @import "@picocss/pico/scss/layout/scroller"; // figure
+
+// Content
+@import "@picocss/pico/scss/content/typography"; // a, headings, p, ul, blockquote, ...
+// @import "@picocss/pico/scss/content/embedded"; // audio, canvas, iframe, img, svg, video
+// @import "@picocss/pico/scss/content/button"; // button, a[role=button], type=button, type=submit ...
+@import "@picocss/pico/scss/content/form"; // input, select, textarea, label, fieldset, legend
+// @import "@picocss/pico/scss/content/form-checkbox-radio"; // type=checkbox, type=radio, role=switch
+// @import "@picocss/pico/scss/content/form-alt-input-types"; // type=color, type=date, type=file, type=search, ...
+// @import "@picocss/pico/scss/content/table"; // table, tr, td, ...
+// @import "@picocss/pico/scss/content/code"; // pre, code, ...
+// @import "@picocss/pico/scss/content/miscs"; // hr, template, [hidden], dialog, canvas
+
+// Components
+// @import "@picocss/pico/scss/components/accordion"; // details, summary
+// @import "@picocss/pico/scss/components/card"; // article
+// @import "@picocss/pico/scss/components/modal"; // dialog
+@import "@picocss/pico/scss/components/nav"; // nav
+// @import "@picocss/pico/scss/components/progress"; // progress
+// @import "@picocss/pico/scss/components/dropdown"; // dropdown
+
+// Utilities
+// @import "@picocss/pico/scss/utilities/loading"; // aria-busy=true
+// @import "@picocss/pico/scss/utilities/tooltip"; // data-tooltip
+@import "@picocss/pico/scss/utilities/accessibility"; // -ms-touch-action, aria-*
+@import "@picocss/pico/scss/utilities/reduce-motion"; // prefers-reduced-motion
+
+#top-nav {
+  display: block;
+}
+
+@mixin visually-hidden {
+}
+
+.visually-hidden,
+.visually-hidden-focusable:not(:focus):not(:active),
+#settings-menu-checkbox:not(:checked)
+  ~ #settings-menu:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  min-height: 100vh;
+}
+
+header {
+  padding-top: 1rem;
+}
+
+.svg-inline--fa {
+  display: inline-block;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+
+.hamburger {
+  cursor: pointer;
+  display: block;
+  float: right;
+  padding: 40px 20px;
+}
+
+#settings-menu-checkbox:not(:checked)
+  ~ #settings-menu:not(:focus):not(:active) {
+  transform: scaleY(0);
+}
+
+#settings-menu {
+  transition: transform var(--transition);
+}
+
+option,
+optgroup {
+  
+  background: var(--background-color);
+}
