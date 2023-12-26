@@ -13,6 +13,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           # If your repository depends on submodule, please see: https://github.com/actions/checkout
           submodules: recursive
+      - run: sudo apt update -yy
+      - run: sudo apt install -yy jpeg-xl
       - name: Use Node.js 20.x
         uses: actions/setup-node@v2
         with:
@@ -26,6 +28,6 @@ jobs:
           BUNNY_STORAGE_HOSTNAME: storage.bunnycdn.com
           BUNNY_STORAGE_USERNAME: lotte-chir-rs
           BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
-          BUNNY_PULL_ZONE_ID: 1893884 
+          BUNNY_PULL_ZONE_ID: 1893884
         with:
           args: deploy --dir=public
