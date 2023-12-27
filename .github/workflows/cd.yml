@@ -10,12 +10,14 @@ jobs:
     container: archlinux:latest
     steps:
       - run: pacman --noconfirm -Syu
-      - run: pacman --noconfirm -S libjxl git nodejs npm imagemagick libwebp libavif libheif git
+      - run: pacman --noconfirm -S libjxl git nodejs npm imagemagick libwebp libavif libheif git git-lfs
       - run: npm install -g yarn
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          recursive: true
+          lfs: true
+          submodules: true
+      - run: (cd assets/art; git lfs install; git lfs pull) # github what the fuck
       - name: Use Node.js 20.x
         uses: actions/setup-node@v2
         with:
