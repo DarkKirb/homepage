@@ -12,7 +12,7 @@ jobs:
       - run: pacman --noconfirm -Syu
       - run: pacman --noconfirm -S libjxl git nodejs npm imagemagick libwebp libavif libheif git git-lfs
       - run: npm install -g yarn
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           lfs: true
