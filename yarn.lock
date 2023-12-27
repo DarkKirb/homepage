@@ -2099,7 +2099,7 @@ etag@~1.8.1:
   resolved "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
-extend@^3.0.1, extend@~3.0.2:
+extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
@@ -3547,15 +3547,6 @@ postcss-convert-values@^6.0.1:
   dependencies:
     browserslist "^4.21.4"
     postcss-value-parser "^4.2.0"
-
-postcss-css-variables@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/postcss-css-variables/-/postcss-css-variables-0.19.0.tgz#7485b1acd8c63cb2ed035ad888996e317db204cf"
-  integrity sha512-Hr0WEYKLK9VCrY15anHXOd4RCvJy/xRvCnWdplGBeLInwEj6Z14hgzTb2W/39dYTCnS8hnHUfU4/F1zxX0IZuQ==
-  dependencies:
-    balanced-match "^1.0.0"
-    escape-string-regexp "^1.0.3"
-    extend "^3.0.1"
 
 postcss-custom-media@^5.0.0:
   version "5.0.1"

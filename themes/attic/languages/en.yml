@@ -26,3 +26,5 @@ theme:
   light: Trans Rights (default light theme)
   white: White Theme (high contrast)
 footer: Copyright © %s Charlotte 🦝 Raccoon. Powered by Hexo.
+nav:
+  recentPosts: Recent Posts

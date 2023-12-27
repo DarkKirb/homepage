@@ -1,3 +1,21 @@
 <article class="h-card clearfix" itemscope itemtype="https://schema.org/Person" vocab="https://schema.org/" typeof="Person">
+  <% site.pages.each((page) => { %>
+  <%   if (page.source == "home.ejs") { %>
   <%- page.content %>
+  <% }}); %>
 </article>
+<aside>
+  <h2><%= __("nav.recentPosts") %></h2>
+  <ul>
+    <% page.posts.each((post, i) => { %>
+    <% if (i >= 10) return; %>
+    <li>
+      <% if (!(post.updated.isSame(post.date))) { %>
+      <a href="<%- url_for(post.path) %>">[<%= post.date.format("YYYY-MM-DD") %>] <%= post.title %></a>
+      <% } else { %>
+      <a href="<%- url_for(post.path) %>">[UPDATED <%= post.updated.format("YYYY-MM-DD") %>] <%= post.title %></a>
+      <% } %>
+    </li>
+    <% }) %>
+  </ul>
+</aside>
