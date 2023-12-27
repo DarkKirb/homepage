@@ -110,3 +110,9 @@ theme: attic
 babel:
   exclude:
     - "*.min.js"
+
+minify:
+  gzip:
+    enable: false
+  brotli:
+    enable: false
