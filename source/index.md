@@ -1,12 +1,11 @@
 <figure class="u-photo pfpfig">
-{% image "art/2021-12-12-baltnwolf-christmas-diaper.jxl" %}
+{% image "art/2023-10-26-sammythetanuki-babylottepfp.jxl" %}
 {
     "widths": [[576, 128], [577, 256]],
-    "extraArgs": ["-crop", "871x871+181+293"],
-    "alt": "Charlotte Raccoon from behind, looking at the camera. Charlotte is looking a bit surprised and is lifting a finger. In the background is a decorated christmas tree."
+    "alt": "Portrait of Charlotte, an orange raccoon with pink face and purple mask. It is wearing a purple bandanna around its neck and a purple pacifier with a pink heart on it."
 }
 {% endimage %}
-<figcaption>Artwork by <a href="https://www.furaffinity.net/user/baltnwolf/" hreflang="en">BaltNWolf</a>.</figcaption>
+<figcaption>Artwork by <a href="https://furaffinity.net/user/sammythetanuki" hreflang="en">Sammy the Tanuki</a>.</figcaption>
 </figure>
 
 <p class="p-note">

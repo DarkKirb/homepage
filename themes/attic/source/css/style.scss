@@ -54,9 +54,6 @@ body {
   display: block;
 }
 
-@mixin visually-hidden {
-}
-
 .visually-hidden,
 .visually-hidden-focusable:not(:focus):not(:active),
 #settings-menu-checkbox:not(:checked)
