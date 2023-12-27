@@ -1,0 +1,3 @@
+[submodule "assets/art"]
+	path = assets/art
+	url = https://git.chir.rs/darkkirb/lotte-art

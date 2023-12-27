@@ -1,5 +1,5 @@
 <figure class="u-photo pfpfig">
-{% image "2021-12-12-baltnwolf-christmas-diaper.jxl" %}
+{% image "art/2021-12-12-baltnwolf-christmas-diaper.jxl" %}
 {
     "widths": [[576, 128], [577, 256]],
     "extraArgs": ["-crop", "871x871+181+293"],
