@@ -19,7 +19,7 @@ jobs:
           submodules: true
       - run: (cd assets/art; git lfs install; git lfs pull) # github what the fuck
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "yarn"
