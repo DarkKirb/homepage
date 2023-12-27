@@ -116,3 +116,6 @@ minify:
     enable: false
   brotli:
     enable: false
+
+sitemap:
+  rel: true
