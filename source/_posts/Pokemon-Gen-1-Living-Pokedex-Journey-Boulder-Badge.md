@@ -9,6 +9,7 @@ tags:
     - Living Pokédex Hunt
     - Pokémon
     - Pokémon Yellow
+permalink: /2023/09/06/pokemon-gen-1-living-pokedex-journey-boulder-badge/
 ---
 
 As mentioned in the previous blog post, I am creating a Living Dex in Pokémon Yellow. Currently I possess a total of 40 Pokémon from previous games, but this number is of course going to increase starting now.
