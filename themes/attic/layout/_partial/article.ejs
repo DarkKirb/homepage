@@ -19,8 +19,7 @@
   <%- post.content %>
   <% } %>
   <footer class="article-footer">
-    <label for="permalink">Permalink:</label>
-    <input id="permalink" type="text" value="<%- post.permalink %>" readonly>
+    <p>Permalink: <a href="<%- post.permalink %>"><%- post.permalink %></a></p>
     <%- partial('post/tag') %>
   </footer>
   <% if (!index){ %>
