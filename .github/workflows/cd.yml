@@ -31,6 +31,6 @@ jobs:
           BUNNY_STORAGE_HOSTNAME: storage.bunnycdn.com
           BUNNY_STORAGE_USERNAME: lotte-chir-rs
           BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
-          BUNNY_PULL_ZONE_ID: 1893884
+          BUNNY_PULL_ZONE_ID: 1588478
         with:
           args: deploy --dir=public
