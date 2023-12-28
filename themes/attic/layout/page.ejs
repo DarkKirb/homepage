@@ -1,3 +1,20 @@
-<article>
-  <%- page.content %>
-</article>
+<%- partial('_partial/article', {post: page, index: false}) %>
+<% if (page.source == "index.ejs") { %>
+<aside>
+  <% if (site.posts.length){ %>
+  <h2>Recent Posts</h2>
+  <ul>
+    <% site.posts.each((post, i) => { %>
+    <% if (i >= 10) return; %>
+    <li class="h-feed">
+      <% if (!(post.updated.isSame(post.date))) { %>
+      <a class="u-url h-entry" href="<%- url_for(post.path) %>">[<%= post.date.format("YYYY-MM-DD") %>] <%= post.title %></a>
+      <% } else { %>
+      <a class="u-url h-entry" href="<%- url_for(post.path) %>">[UPDATED <%= post.updated.format("YYYY-MM-DD") %>] <%= post.title %></a>
+      <% } %>
+    </li>
+    <% }) %>
+  </ul>
+  <% } %>
+</aside>
+<% } %>

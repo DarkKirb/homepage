@@ -49,8 +49,8 @@
       <input class="visually-hidden" type="checkbox" id="settings-menu-checkbox" aria-hidden="true" tabindex="-1">
       <label class="hamburger" for="settings-menu-checkbox" title="<%= __("settings.menuName") %>" aria-hidden="true"><%- fa_inline('cog') %></label>
       <ul style="display: flex">
-        <li><a href="/"><%= __("page.homepage") %></a></li>
-        <li><a><%= __("page.blog") %></a></li>
+        <li><a href="<%= url_for("") %>"><%= __("page.homepage") %></a></li>
+        <li><a href="<%= url_for("blog") %>"><%= __("page.blog") %></a></li>
         <li><a><%= __("page.chat") %></a></li>
       </ul>
       <div id="settings-menu">

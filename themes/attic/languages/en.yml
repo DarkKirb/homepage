@@ -5,8 +5,8 @@ title:
     month: "Archive: %d / %d | Lotte’s Attic"
     year: "Archive: %d | Lotte’s Attic"
     generic: Archive | Lotte’s Attic"
-  category: "Category: %d | Lotte’s Attic"
-  tag: "Tag: %d | Lotte’s Attic"
+  category: "Category: %s | Lotte’s Attic"
+  tag: "Tag: %s | Lotte’s Attic"
   basic: "%s | Lotte’s Attic"
   homepage: "Lotte’s Attic"
   homepageTagline: Raccoons? On the internet? It’s more likely than you think!

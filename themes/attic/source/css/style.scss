@@ -33,7 +33,7 @@ body {
 // @import "@picocss/pico/scss/content/form-checkbox-radio"; // type=checkbox, type=radio, role=switch
 // @import "@picocss/pico/scss/content/form-alt-input-types"; // type=color, type=date, type=file, type=search, ...
 // @import "@picocss/pico/scss/content/table"; // table, tr, td, ...
-// @import "@picocss/pico/scss/content/code"; // pre, code, ...
+@import "@picocss/pico/scss/content/code"; // pre, code, ...
 @import "@picocss/pico/scss/content/miscs"; // hr, template, [hidden], dialog, canvas
 
 // Components
@@ -149,4 +149,23 @@ article {
   border: 1px solid var(--article-border-color);
   box-shadow: 0 1px 5px 0 var(--background-translucent);
   padding: 1rem;
+}
+
+@media (prefers-contrast: no-preference) {
+  [data-theme="light"],
+  :root:not([data-theme="sunset"]):not([data-theme="black"]):not(
+      [data-theme="white"]
+    ) {
+    @import "_prism.scss";
+  }
+  @media screen and (prefers-color-scheme: dark) {
+    :root:not([data-theme]):not([data-theme]):not([data-theme]):not(
+        [data-theme]
+      ) {
+      @import "_prism-dark.scss";
+    }
+    [data-theme="sunset"] {
+      @import "_prism-dark.scss";
+    }
+  }
 }

@@ -1,0 +1,29 @@
+<article id="<%= post.layout %>-<%= post.slug %>" class="<% if(!index) { %> h-entry <% } %>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <header>
+    <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
+    <%- partial('post/category') %>
+    <%- partial('post/gallery') %>
+    <% if (post.link || post.title){ %>
+    <%- partial('post/title', {class_name: 'p-name article-title'}) %>
+    <% } %>
+  </header>
+
+  <% if (post.excerpt && index){ %>
+  <%- post.excerpt %>
+  <% if (theme.excerpt_link){ %>
+  <p class="article-more-link">
+    <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
+  </p>
+  <% } %>
+  <% } else { %>
+  <%- post.content %>
+  <% } %>
+  <footer class="article-footer">
+    <label for="permalink">Permalink:</label>
+    <input id="permalink" type="text" value="<%- post.permalink %>" readonly>
+    <%- partial('post/tag') %>
+  </footer>
+  <% if (!index){ %>
+  <%- partial('post/nav') %>
+  <% } %>
+</article>

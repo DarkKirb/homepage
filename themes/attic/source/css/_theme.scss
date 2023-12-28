@@ -659,6 +659,9 @@ a,
   --primary-hover: var(--foreground-color) !important;
   --primary-focus: var(--foreground-color) !important;
   --article-border-color: var(--foreground-color) !important;
+  --card-sectionning-background-color: var(--background-color) !important;
+  --del-color: var(--foreground-color) !important;
+  --card-border-color: var(--foreground-color) !important;
 }
 
 @media (prefers-contrast: more) {
