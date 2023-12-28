@@ -37,6 +37,7 @@
     "hexo-yam": "^8.0.0",
     "katex": "^0.16.9",
     "level4": "^1.0.1",
+    "pokemon": "^2.3.6",
     "postcss": "^8.4.32",
     "postcss-load-config": "^5.0.2",
     "postcss-prune-var": "^1.1.1",

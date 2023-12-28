@@ -64,7 +64,10 @@ async function convert_image(args, options) {
   options = JSON.parse(options);
   console.log(options);
 
-  const srcPath = pathFn.join(hexo.base_dir, "assets", src);
+  let srcPath = pathFn.join(hexo.base_dir, "assets", src);
+  if (!(await fs.pathExists(srcPath))) {
+    srcPath = pathFn.join(hexo.source_dir, "_posts", src);
+  }
   console.log(`Converting ${srcPath}`);
   const info = await easyimage.info(srcPath);
   console.log(info);
@@ -89,7 +92,7 @@ async function convert_image(args, options) {
   }
 
   const hash = await do_one(srcPath, options, info.width, "jpg", dest_dir);
-  html += `<img src="/img/${hash}.jpg" alt="${options.alt}">`;
+  html += `<img src="/img/${hash}.jpg" alt="${options.alt}" loading="lazy" decoding="lazy">`;
   html += "</picture>";
 
   return html;

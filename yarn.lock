@@ -3458,6 +3458,13 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.3.1:
   resolved "https://registry.npmjs.org/picomatch/-/picomatch-2.3.1.tgz"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
+pokemon@^2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/pokemon/-/pokemon-2.3.6.tgz#056434e03896a3964db4c4c563bdb34ae4ea87f6"
+  integrity sha512-Pctu9QYk0mrCZIXXzMkx1zk21EeyLeT1yzVeA1N1t2vvotj+XXNliBZVrI7pxy7DSLhpjR92d24Vp0X/rWr00Q==
+  dependencies:
+    unique-random-array "^2.0.0"
+
 postcss-calc@^9.0.1:
   version "9.0.1"
   resolved "https://registry.npmjs.org/postcss-calc/-/postcss-calc-9.0.1.tgz"
@@ -4574,6 +4581,18 @@ uniq@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
   integrity sha512-Gw+zz50YNKPDKXs+9d+aKAjVwpjNwqzvNpLigIruT4HA9lMZNdMqs9x07kKHB/L9WRzqp4+DlTU5s4wG2esdoA==
+
+unique-random-array@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/unique-random-array/-/unique-random-array-2.0.0.tgz#9e639b1a9dc141e97350a6fc6f17da4b0717b1ad"
+  integrity sha512-xR87O95fZ7hljw84J8r1YDXrvffPLWN513BNOP4Bv0KcgG5dyEUrHwsvP7mVAOKg4Y80uqRbpUk0GKr8il70qg==
+  dependencies:
+    unique-random "^2.1.0"
+
+unique-random@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/unique-random/-/unique-random-2.1.0.tgz#7a8413da5176d028567168b57125ac5c0cec5c25"
+  integrity sha512-iQ1ZgWac3b8YxGThecQFRQiqgk6xFERRwHZIWeVVsqlbmgCRl0PY13R4mUkodNgctmg5b5odG1nyW/IbOxQTqg==
 
 universalify@^0.2.0:
   version "0.2.0"
