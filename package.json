@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "hexo generate; find public -name '*.css*' -delete; hexo generate",
+    "build": "hexo generate",
     "clean": "hexo clean; rm -f cache.*.json",
     "deploy": "hexo deploy",
     "server": "hexo server"

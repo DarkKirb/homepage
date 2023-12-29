@@ -72,7 +72,8 @@ The first Pokémon I encountered on that route was {% pokemon Spearow %}, howeve
 {% image Pokemon-Gen-1-Living-Pokedex-Journey-Boulder-Badge/spearow.webp %}
 {
     "widths": [[768, 256], [769, 512]],
-    "alt": "The pokédex page for Spearow, the Tiny Bird Pokémon. It is 1ft tall and 4lb heavy. Inept at flying high. However, it can fly around very fast to protect its territory"
+    "alt": "The pokédex page for Spearow, the Tiny Bird Pokémon. It is 1ft tall and 4lb heavy. Inept at flying high. However, it can fly around very fast to protect its territory",
+    "pixelArt": true
 }
 {% endimage %}
 
@@ -83,7 +84,8 @@ Shortly after I encounter the {% pokemon Mankey %} I was looking for and catch i
 {% image Pokemon-Gen-1-Living-Pokedex-Journey-Boulder-Badge/mankey.webp %}
 {
     "widths": [[768, 256], [769, 512]],
-    "alt": "Pokédex Entry of Mankey, the Pig Monkey Pokémon. It is 1ft8in tall and 62lb heavy. An agile pokémon that lives in trees. It angers easily and will not hesitate to attack anything."
+    "alt": "Pokédex Entry of Mankey, the Pig Monkey Pokémon. It is 1ft8in tall and 62lb heavy. An agile pokémon that lives in trees. It angers easily and will not hesitate to attack anything.",
+    "pixelArt": true
 }
 {% endimage %}
 
@@ -94,7 +96,8 @@ Directly afterwards I encountered a {% pokemon Nidoran♀ %}, which i quickly ca
 {% image Pokemon-Gen-1-Living-Pokedex-Journey-Boulder-Badge/nidoran-f.webp %}
 {
     "widths": [[768, 256], [769, 512]],
-    "alt": "Pokédex Entry of Nidoran♀, the Poison Pin Pokémon. It is 1ft4in tall and 15lb heavy. A mild-mannered Pokémon that does not like to fight. Beware, its small horn secrete venom."
+    "alt": "Pokédex Entry of Nidoran♀, the Poison Pin Pokémon. It is 1ft4in tall and 15lb heavy. A mild-mannered Pokémon that does not like to fight. Beware, its small horn secrete venom.",
+    "pixelArt": true
 }
 {% endimage %}
 
@@ -105,7 +108,8 @@ And, as luck would have it, I received a {% pokemon Nidoran♂ %} right afterwar
 {% image Pokemon-Gen-1-Living-Pokedex-Journey-Boulder-Badge/nidoran-m.webp %}
 {
     "widths": [[768, 256], [769, 512]],
-    "alt": "Pokédex Entry of Nidoran♂, the Poison Pin Pokémon. It is 1ft8in tall and 20lb heavy. Its large ears are always kept upright. If it senses danger, it will attack with a poisonous sting."
+    "alt": "Pokédex Entry of Nidoran♂, the Poison Pin Pokémon. It is 1ft8in tall and 20lb heavy. Its large ears are always kept upright. If it senses danger, it will attack with a poisonous sting.",
+    "pixelArt": true
 }
 {% endimage %}
 
@@ -122,7 +126,8 @@ The hunt for the {% pokemon Rattata %} was of course very quick, and after just 
 {% image Pokemon-Gen-1-Living-Pokedex-Journey-Boulder-Badge/rattata.webp %}
 {
     "widths": [[768, 256], [769, 512]],
-    "alt": "Pokédex Entry of Rattata the Rat Pokémon. It is 1ft tall and 8lb heavy. Will chew with anything on its fangs. If you see one, it is certain that 40 more live in the area."
+    "alt": "Pokédex Entry of Rattata the Rat Pokémon. It is 1ft tall and 8lb heavy. Will chew with anything on its fangs. If you see one, it is certain that 40 more live in the area.",
+    "pixelArt": true
 }
 {% endimage %}
 
@@ -137,7 +142,8 @@ Viridian Forest is the first place with Trainer Battles. I’ll primarily update
 {% image Pokemon-Gen-1-Living-Pokedex-Journey-Boulder-Badge/caterpie.webp %}
 {
     "widths": [[768, 256], [769, 512]],
-    "alt": "Pokédex Entry of Caterpie, the Worm pokémon. It is 1ft tall and 6lb heavy. If you touch the feeler on top of its head, it will release a horrible stink to protect itself."
+    "alt": "Pokédex Entry of Caterpie, the Worm pokémon. It is 1ft tall and 6lb heavy. If you touch the feeler on top of its head, it will release a horrible stink to protect itself.",
+    "pixelArt": true
 }
 {% endimage %}
 
@@ -146,7 +152,8 @@ After 2 encounters, I find the next Pokémon I need, {% pokemon Metapod %}:
 {% image Pokemon-Gen-1-Living-Pokedex-Journey-Boulder-Badge/metapod.webp %}
 {
     "widths": [[768, 256], [769, 512]],
-    "alt": "Pokédex Entry of Metapod, the Cocoon pokémon. It is 2ft4in tall and 22lb heavy. Hardens its shell to protect itself. However, a large impact may cause it to pop out of its shell."
+    "alt": "Pokédex Entry of Metapod, the Cocoon pokémon. It is 2ft4in tall and 22lb heavy. Hardens its shell to protect itself. However, a large impact may cause it to pop out of its shell.",
+    "pixelArt": true
 }
 {% endimage %}
 
@@ -156,7 +163,8 @@ After 2 encounters, I find the next Pokémon I need, {% pokemon Metapod %}:
 {% image Pokemon-Gen-1-Living-Pokedex-Journey-Boulder-Badge/viridian-forest.webp %}
 {
     "widths": [[768, 256], [769, 512]],
-    "alt": "Viridian Forest in-game. There are numerous trees and a grassy path and a not grassy path. In the middle is the main character, their Pikachu, and below that is another trainer."
+    "alt": "Viridian Forest in-game. There are numerous trees and a grassy path and a not grassy path. In the middle is the main character, their Pikachu, and below that is another trainer.",
+    "pixelArt": true
 }
 {% endimage %}
 

@@ -12,6 +12,9 @@ const qualities = {
   jxl: 70,
 };
 
+const formats = ["jpg", "webp", "heif", "avif", "jxl"];
+const pixelArtFormats = ["png", "webp"];
+
 var fileCache = {};
 
 fs.readFile(pathFn.join(hexo.base_dir, "cache.image.json"), "utf8")
@@ -20,12 +23,18 @@ fs.readFile(pathFn.join(hexo.base_dir, "cache.image.json"), "utf8")
   })
   .catch((_) => {});
 
+function cache_key(args) {
+  let inp = args.map((v) => JSON.stringify(v)).join("|");
+  const hash = crypto.createHash("sha256").update(inp).digest("hex");
+  return hash;
+}
+
 function lookup_cache(args) {
-  return fileCache[args.map((v) => JSON.stringify(v)).join("|")];
+  return fileCache[cache_key(args)];
 }
 
 async function set_cache(args, result) {
-  fileCache[args.map((v) => JSON.stringify(v)).join("|")] = result;
+  fileCache[cache_key(args)] = result;
   await fs.writeFile(
     pathFn.join(hexo.base_dir, "cache.image.json"),
     JSON.stringify(fileCache)
@@ -38,21 +47,33 @@ async function hash_file(path) {
   return hash;
 }
 
-async function do_one(srcPath, options, width, format, dest_dir) {
-  let cached_result = lookup_cache([srcPath, options, width, format]);
+async function do_one(srcPath, options, width, format, dest_dir, lossless) {
+  let cached_result = lookup_cache([srcPath, options, width, format, lossless]);
   if (cached_result) return cached_result;
   console.log(`Converting ${srcPath} to ${width}x${width} with ${format}`);
-  await easyimage.execute("convert", [
-    srcPath,
-    ...(options.extraArgs || []),
-    "-resize",
-    `${width}x${width}`,
-    "-quality",
-    qualities[format],
-    `out.${format}`,
-  ]);
-  const hash = await hash_file(`out.${format}`);
-  await fs.rename(`out.${format}`, pathFn.join(dest_dir, `${hash}.${format}`));
+  let out_path =
+    cache_key([srcPath, options, width, format, lossless]) + `.${format}`;
+  if (lossless) {
+    await easyimage.execute("convert", [
+      srcPath,
+      ...(options.extraArgs || []),
+      "-resize",
+      `${width}x${width}`,
+      out_path,
+    ]);
+  } else {
+    await easyimage.execute("convert", [
+      srcPath,
+      ...(options.extraArgs || []),
+      "-resize",
+      `${width}x${width}`,
+      "-quality",
+      qualities[format],
+      out_path,
+    ]);
+  }
+  const hash = await hash_file(out_path);
+  await fs.rename(out_path, pathFn.join(dest_dir, `${hash}.${format}`));
   console.log(`Converted ${srcPath} to ${hash}.${format}`);
   await set_cache([srcPath, options, width, format], hash);
   return hash;
@@ -61,8 +82,15 @@ async function do_one(srcPath, options, width, format, dest_dir) {
 async function convert_image(args, options) {
   console.log(args);
   var [src] = args;
-  options = JSON.parse(options);
+  options = JSON.parse(options) || {};
   console.log(options);
+
+  options.pixelArt = options.pixelArt || false;
+
+  let chosenFormats = formats;
+  if (options.pixelArt) {
+    chosenFormats = pixelArtFormats;
+  }
 
   let srcPath = pathFn.join(hexo.base_dir, "assets", src);
   if (!(await fs.pathExists(srcPath))) {
@@ -79,10 +107,17 @@ async function convert_image(args, options) {
 
   var html = "<picture>";
 
-  for (const format of ["jxl", "avif", "heif", "webp", "jpg"]) {
+  for (const format of chosenFormats) {
     for (const [mediaWidth, width] of options.widths) {
       if (width > info.width) continue;
-      const hash = await do_one(srcPath, options, width, format, dest_dir);
+      const hash = await do_one(
+        srcPath,
+        options,
+        width,
+        format,
+        dest_dir,
+        options.pixelArt
+      );
       if (mediaWidth == largestMediaWidth) {
         html += `<source srcset="/img/${hash}.${format}" media="(min-width: ${mediaWidth}px)" type="image/${format}">`;
       } else {
@@ -91,8 +126,27 @@ async function convert_image(args, options) {
     }
   }
 
-  const hash = await do_one(srcPath, options, info.width, "jpg", dest_dir);
-  html += `<img src="/img/${hash}.jpg" alt="${options.alt}" loading="lazy" decoding="lazy">`;
+  if (options.pixelArt) {
+    const hash = await do_one(
+      srcPath,
+      options,
+      info.width,
+      "png",
+      dest_dir,
+      true
+    );
+    html += `<img src="/img/${hash}.png" alt="${options.alt}" loading="lazy" decoding="lazy">`;
+  } else {
+    const hash = await do_one(
+      srcPath,
+      options,
+      info.width,
+      "jpg",
+      dest_dir,
+      false
+    );
+    html += `<img src="/img/${hash}.jpg" alt="${options.alt}" loading="lazy" decoding="lazy">`;
+  }
   html += "</picture>";
 
   return html;
