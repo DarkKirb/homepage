@@ -14,7 +14,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
-    "@csstools/postcss-sass": "^5.0.1",
+    "@csstools/postcss-sass": "^5.1.1",
     "cssnano": "^6.0.2",
     "cssnano-preset-advanced": "^6.0.2",
     "easyimage": "^3.1.1",
