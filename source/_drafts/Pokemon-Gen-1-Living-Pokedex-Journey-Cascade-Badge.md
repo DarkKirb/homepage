@@ -43,7 +43,7 @@ At the aforementioned {% pokemon Spearow %} youngster, my {% pokemon Metapod %} 
 
 {% image ../_drafts/Pokemon-Gen-1-Living-Pokedex-Journey-Cascade-Badge/butterfree.webp %}
 {
-    "widths": [[768, 256], [769, 512]],
+    "widths": [[768, 320], [769, 640]],
     "alt": "Evolution screen in Pokémon Yellow, showing that METAPOD evolved into BUTTERFREE",
     "pixelArt": true
 }
@@ -53,7 +53,7 @@ Luckily, my first encounter ended up being {% pokemon Sandshrew %}, which I had 
 
 {% image ../_drafts/Pokemon-Gen-1-Living-Pokedex-Journey-Cascade-Badge/sandshrew.webp %}
 {
-    "widths": [[768, 256], [769, 512]],
+    "widths": [[768, 320], [769, 640]],
     "alt": "Pokédex entry of Sandshrew, the Mouse Pokémon. It is 2ft tall and 26lb heavy. Its body is dry. When it gets cold at night, its hide is said to become coated with a fine dew.",
     "pixelArt": true
 }

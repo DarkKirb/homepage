@@ -57,7 +57,7 @@ async function do_one(srcPath, options, width, format, dest_dir, lossless) {
     await easyimage.execute("convert", [
       srcPath,
       ...(options.extraArgs || []),
-      "-resize",
+      "-scale",
       `${width}x${width}`,
       out_path,
     ]);
