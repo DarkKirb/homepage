@@ -2,6 +2,7 @@
 title: Pokémon Gen 1 Living Pokédex Journey Introduction
 date: 2023-09-04
 categories:
+    - Games
     - Pokémon
     - Pokémon Yellow
 tags:

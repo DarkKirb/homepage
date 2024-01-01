@@ -3,6 +3,7 @@ title: 'Pokémon Gen 1 Living Pokédex Journey: Boulder Badge'
 date: 2023-09-06
 updated: 2023-12-18
 categories:
+    - Games
     - Pokémon
     - Pokémon Yellow
 tags:

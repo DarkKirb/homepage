@@ -12,8 +12,8 @@ const qualities = {
   jxl: 70,
 };
 
-const formats = ["jpg", "webp", "heif", "avif", "jxl"];
-const pixelArtFormats = ["png", "webp"];
+const formats = ["jxl", "avif", "heif", "webp", "jpg"];
+const pixelArtFormats = ["webp", "png"];
 
 var fileCache = {};
 
@@ -21,20 +21,23 @@ fs.readFile(pathFn.join(hexo.base_dir, "cache.image.json"), "utf8")
   .then((data) => {
     fileCache = JSON.parse(data);
   })
-  .catch((_) => {});
+  .catch((e) => {
+    console.error(e);
+  });
 
-function cache_key(args) {
+async function cache_key(args) {
+  args[0] = await hash_file(args[0]);
   let inp = args.map((v) => JSON.stringify(v)).join("|");
   const hash = crypto.createHash("sha256").update(inp).digest("hex");
   return hash;
 }
 
-function lookup_cache(args) {
-  return fileCache[cache_key(args)];
+async function lookup_cache(args) {
+  return fileCache[await cache_key(args)];
 }
 
 async function set_cache(args, result) {
-  fileCache[cache_key(args)] = result;
+  fileCache[await cache_key(args)] = result;
   await fs.writeFile(
     pathFn.join(hexo.base_dir, "cache.image.json"),
     JSON.stringify(fileCache)
@@ -48,11 +51,18 @@ async function hash_file(path) {
 }
 
 async function do_one(srcPath, options, width, format, dest_dir, lossless) {
-  let cached_result = lookup_cache([srcPath, options, width, format, lossless]);
+  let cached_result = await lookup_cache([
+    srcPath,
+    options,
+    width,
+    format,
+    lossless,
+  ]);
   if (cached_result) return cached_result;
   console.log(`Converting ${srcPath} to ${width}x${width} with ${format}`);
   let out_path =
-    cache_key([srcPath, options, width, format, lossless]) + `.${format}`;
+    (await cache_key([srcPath, options, width, format, lossless])) +
+    `.${format}`;
   if (lossless) {
     await easyimage.execute("convert", [
       srcPath,
@@ -75,7 +85,7 @@ async function do_one(srcPath, options, width, format, dest_dir, lossless) {
   const hash = await hash_file(out_path);
   await fs.rename(out_path, pathFn.join(dest_dir, `${hash}.${format}`));
   console.log(`Converted ${srcPath} to ${hash}.${format}`);
-  await set_cache([srcPath, options, width, format], hash);
+  await set_cache([srcPath, options, width, format, lossless], hash);
   return hash;
 }
 
@@ -104,8 +114,14 @@ async function convert_image(args, options) {
   await fs.mkdirs(dest_dir);
 
   let largestMediaWidth = Math.max(...options.widths.map(([a, _]) => a));
+  let largestOutputWidth = Math.max(...options.widths.map(([_, a]) => a));
 
-  var html = "<picture>";
+  var html = "<picture";
+
+  if (options.inline)
+    html += ` style="display: inline-block; max-width: ${largestOutputWidth}"`;
+
+  html += ">";
 
   for (const format of chosenFormats) {
     for (const [mediaWidth, width] of options.widths) {
