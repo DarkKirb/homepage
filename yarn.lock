@@ -1206,7 +1206,7 @@ autolinker@~0.28.0:
   dependencies:
     gulp-header "^1.7.1"
 
-autoprefixer@^10.4.12:
+autoprefixer@^10.4.16:
   version "10.4.16"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.16.tgz#fad1411024d8670880bdece3970aa72e3572feb8"
   integrity sha512-7vd3UC6xKp0HLfua5IjZlcXvGAGy7cBAXTg2lyQ/8WpNhd6SiZ8Be+xm3FyBSYJx5GKcpRCzBh7RH4/0dnY+uQ==
@@ -1671,19 +1671,19 @@ cssesc@^3.0.0:
   resolved "https://registry.npmjs.org/cssesc/-/cssesc-3.0.0.tgz"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
 
-cssnano-preset-advanced@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/cssnano-preset-advanced/-/cssnano-preset-advanced-6.0.2.tgz#adada114d38112b28663b4626dd6cf67a520de4f"
-  integrity sha512-1ziCYBklE4iQDuYy6RRumEhJDKv442d7ezzyDb1p3yYSmdz5GMan5y4xJc9YLgbiFJ9gufir9axrDUDjtT07pQ==
+cssnano-preset-advanced@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/cssnano-preset-advanced/-/cssnano-preset-advanced-6.0.3.tgz#951af1ba95bdf59e05dd60d209c40e7b7578e814"
+  integrity sha512-+DIOR5FFId+nb6/JcBkAMiXYDadEx2waDmSDhAA3rL1Q1N1AaZP0N25jiZnqLp3MdWnRg9t9CNaDs/OdB/lpPg==
   dependencies:
-    autoprefixer "^10.4.12"
-    cssnano-preset-default "^6.0.2"
-    postcss-discard-unused "^6.0.1"
+    autoprefixer "^10.4.16"
+    cssnano-preset-default "^6.0.3"
+    postcss-discard-unused "^6.0.2"
     postcss-merge-idents "^6.0.1"
     postcss-reduce-idents "^6.0.2"
     postcss-zindex "^6.0.1"
 
-cssnano-preset-default@^6.0.2, cssnano-preset-default@^6.0.3:
+cssnano-preset-default@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/cssnano-preset-default/-/cssnano-preset-default-6.0.3.tgz#b4ce755974f4dc8d3d09ac13bb6281cce3ced45e"
   integrity sha512-4y3H370aZCkT9Ev8P4SO4bZbt+AExeKhh8wTbms/X7OLDo5E7AYUUy6YPxa/uF5Grf+AJwNcCnxKhZynJ6luBA==
@@ -3589,12 +3589,12 @@ postcss-discard-overridden@^6.0.1:
   resolved "https://registry.npmjs.org/postcss-discard-overridden/-/postcss-discard-overridden-6.0.1.tgz"
   integrity sha512-qs0ehZMMZpSESbRkw1+inkf51kak6OOzNRaoLd/U7Fatp0aN2HQ1rxGOrJvYcRAN9VpX8kUF13R2ofn8OlvFVA==
 
-postcss-discard-unused@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/postcss-discard-unused/-/postcss-discard-unused-6.0.1.tgz#f3f32577637c5d9fc75c8070b81a128e4440a9cb"
-  integrity sha512-Bihf0iR+C4xyCzydaoCwSWaXPGcALq9ddf/tMYk7yAxbm4TxZ0UUPc1KpHdZLf3/vRC18plXqT8yYAJEw2ncFA==
+postcss-discard-unused@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/postcss-discard-unused/-/postcss-discard-unused-6.0.2.tgz#9741fc4f2f0a1ae21f3a93de4a10ddb5a5c870d0"
+  integrity sha512-wr3lRPahxARmjow5BWML+9bD9D1u6FpfxlWg4lZqCIwvQLBZQD/S0Rq6A/juQwVFVXvMeRGa9TX1vpXuQ6FhTQ==
   dependencies:
-    postcss-selector-parser "^6.0.5"
+    postcss-selector-parser "^6.0.15"
 
 postcss-font-variant@^2.0.0:
   version "2.0.1"
@@ -3832,7 +3832,7 @@ postcss-selector-parser@^1.1.4:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss-selector-parser@^6.0.11, postcss-selector-parser@^6.0.5:
+postcss-selector-parser@^6.0.11:
   version "6.0.13"
   resolved "https://registry.npmjs.org/postcss-selector-parser/-/postcss-selector-parser-6.0.13.tgz"
   integrity sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==
