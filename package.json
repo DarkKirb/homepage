@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",
-    "@babel/preset-env": "^7.23.7",
+    "@babel/preset-env": "^7.23.8",
     "@csstools/postcss-sass": "^5.1.1",
     "cssnano": "^6.0.3",
     "cssnano-preset-advanced": "^6.0.3",
