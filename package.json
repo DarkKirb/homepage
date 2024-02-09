@@ -40,7 +40,7 @@
     "level4": "^1.0.1",
     "pokemon": "^2.3.6",
     "postcss": "^8.4.33",
-    "postcss-load-config": "^5.0.2",
+    "postcss-load-config": "^5.0.3",
     "postcss-prune-var": "^1.1.1",
     "postcss-scss": "^4.0.9"
   },
