@@ -1205,14 +1205,14 @@ autolinker@~0.28.0:
   dependencies:
     gulp-header "^1.7.1"
 
-autoprefixer@^10.4.16:
-  version "10.4.16"
-  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.16.tgz#fad1411024d8670880bdece3970aa72e3572feb8"
-  integrity sha512-7vd3UC6xKp0HLfua5IjZlcXvGAGy7cBAXTg2lyQ/8WpNhd6SiZ8Be+xm3FyBSYJx5GKcpRCzBh7RH4/0dnY+uQ==
+autoprefixer@^10.4.17:
+  version "10.4.18"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.18.tgz#fcb171a3b017be7cb5d8b7a825f5aacbf2045163"
+  integrity sha512-1DKbDfsr6KUElM6wg+0zRNkB/Q7WcKYAaK+pzXn+Xqmszm/5Xa9coeNdtP88Vi+dPzZnMjhge8GIV49ZQkDa+g==
   dependencies:
-    browserslist "^4.21.10"
-    caniuse-lite "^1.0.30001538"
-    fraction.js "^4.3.6"
+    browserslist "^4.23.0"
+    caniuse-lite "^1.0.30001591"
+    fraction.js "^4.3.7"
     normalize-range "^0.1.2"
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
@@ -1305,7 +1305,7 @@ braces@^3.0.2, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-browserslist@^4.0.0, browserslist@^4.21.10, browserslist@^4.22.2:
+browserslist@^4.0.0, browserslist@^4.22.2:
   version "4.22.2"
   resolved "https://registry.npmjs.org/browserslist/-/browserslist-4.22.2.tgz"
   integrity sha512-0UgcrvQmBDvZHFGdYUehrCNIazki7/lUP3kkoi/r3YB2amZbFM9J43ZRkJTXBUZK4gmx56+Sqk9+Vs9mwZx9+A==
@@ -1380,7 +1380,7 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001538, caniuse-lite@^1.0.30001565:
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001565:
   version "1.0.30001571"
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001571.tgz"
   integrity sha512-tYq/6MoXhdezDLFZuCO/TKboTzuQ/xR5cFdgXPfDtM7/kchBO3b4VWghE/OAi/DV7tTdhmLjZiZBZi1fA/GheQ==
@@ -1389,6 +1389,11 @@ caniuse-lite@^1.0.30001587:
   version "1.0.30001589"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001589.tgz#7ad6dba4c9bf6561aec8291976402339dc157dfb"
   integrity sha512-vNQWS6kI+q6sBlHbh71IIeC+sRwK2N3EDySc/updIGhIee2x5z00J4c1242/5/d6EpEMdOnk/m+6tuk4/tcsqg==
+
+caniuse-lite@^1.0.30001591:
+  version "1.0.30001593"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001593.tgz#7cda1d9e5b0cad6ebab4133b1f239d4ea44fe659"
+  integrity sha512-UWM1zlo3cZfkpBysd7AS+z+v007q9G1+fLTUU42rQnY6t2axoogPW/xol6T7juU5EUoOhML4WgBIdG+9yYqAjQ==
 
 chalk@^1.1.3:
   version "1.1.3"
@@ -1685,19 +1690,19 @@ cssesc@^3.0.0:
   resolved "https://registry.npmjs.org/cssesc/-/cssesc-3.0.0.tgz"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
 
-cssnano-preset-advanced@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/cssnano-preset-advanced/-/cssnano-preset-advanced-6.0.3.tgz#951af1ba95bdf59e05dd60d209c40e7b7578e814"
-  integrity sha512-+DIOR5FFId+nb6/JcBkAMiXYDadEx2waDmSDhAA3rL1Q1N1AaZP0N25jiZnqLp3MdWnRg9t9CNaDs/OdB/lpPg==
+cssnano-preset-advanced@^6.0.5:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/cssnano-preset-advanced/-/cssnano-preset-advanced-6.0.5.tgz#4f2c5a1229250129cad4cd11b7e072a720fe6941"
+  integrity sha512-weLbFCo1ka/9oRYDxa+NngtcWf/yDQi6JnjaUTZ1TROWeQVmA7v3xfHQatNYtWa8sloZaTk7KswcwSs7bj7IbA==
   dependencies:
-    autoprefixer "^10.4.16"
-    cssnano-preset-default "^6.0.3"
-    postcss-discard-unused "^6.0.2"
-    postcss-merge-idents "^6.0.1"
+    autoprefixer "^10.4.17"
+    cssnano-preset-default "^6.0.5"
+    postcss-discard-unused "^6.0.3"
+    postcss-merge-idents "^6.0.2"
     postcss-reduce-idents "^6.0.2"
     postcss-zindex "^6.0.1"
 
-cssnano-preset-default@^6.0.3, cssnano-preset-default@^6.0.5:
+cssnano-preset-default@^6.0.5:
   version "6.0.5"
   resolved "https://registry.yarnpkg.com/cssnano-preset-default/-/cssnano-preset-default-6.0.5.tgz#c7afd6af1230a78b8d12c6da771d1156ab0127cf"
   integrity sha512-M+qRDEr5QZrfNl0B2ySdbTLGyNb8kBcSjuwR7WBamYBOEREH9t2efnB/nblekqhdGLZdkf4oZNetykG2JWRdZQ==
@@ -2131,7 +2136,7 @@ form-data@^4.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
-fraction.js@^4.3.6:
+fraction.js@^4.3.7:
   version "4.3.7"
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.3.7.tgz#06ca0085157e42fda7f9e726e79fefc4068840f7"
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
@@ -3608,10 +3613,10 @@ postcss-discard-overridden@^6.0.1:
   resolved "https://registry.npmjs.org/postcss-discard-overridden/-/postcss-discard-overridden-6.0.1.tgz"
   integrity sha512-qs0ehZMMZpSESbRkw1+inkf51kak6OOzNRaoLd/U7Fatp0aN2HQ1rxGOrJvYcRAN9VpX8kUF13R2ofn8OlvFVA==
 
-postcss-discard-unused@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/postcss-discard-unused/-/postcss-discard-unused-6.0.2.tgz#9741fc4f2f0a1ae21f3a93de4a10ddb5a5c870d0"
-  integrity sha512-wr3lRPahxARmjow5BWML+9bD9D1u6FpfxlWg4lZqCIwvQLBZQD/S0Rq6A/juQwVFVXvMeRGa9TX1vpXuQ6FhTQ==
+postcss-discard-unused@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/postcss-discard-unused/-/postcss-discard-unused-6.0.3.tgz#e21de9bc3c0291b9f5a3883667e6f8c09cca5318"
+  integrity sha512-f0m/zO6BONjcZmp2VQe5CwCQvrcm89DJxYhOgV/nXbMY59j/gxyyx/utMJ18SKSRzutaQd66o+0cj0/yGfNenA==
   dependencies:
     postcss-selector-parser "^6.0.15"
 
@@ -3637,10 +3642,10 @@ postcss-media-minmax@^2.1.0:
   dependencies:
     postcss "^5.0.4"
 
-postcss-merge-idents@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/postcss-merge-idents/-/postcss-merge-idents-6.0.1.tgz#b2d3bb45ba7131cbb3952389b46fad2f8cf6a422"
-  integrity sha512-ApqNUkzl3MJP+43DIIvoer98t7tcDVAcnLeAKjuTIM7HkMk8NXB6eqscMIjwQISwoSeE0WrEyIqVy+HoHAVcZw==
+postcss-merge-idents@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/postcss-merge-idents/-/postcss-merge-idents-6.0.2.tgz#c7c06e8105f0a6ac5c644364a2867b27775e272f"
+  integrity sha512-1fJqEzpgyjuec8UR9WdUDvCU0NhHVwKm4JK2Vk2Xv7RB+zpssSGFNE5Xwa0fmQYFxAwfb824monvKAyqLTGsSw==
   dependencies:
     cssnano-utils "^4.0.1"
     postcss-value-parser "^4.2.0"
