@@ -1,0 +1,57 @@
+@use "sass:map";
+@use "@picocss/pico/scss/settings" as *;
+
+@use "light";
+@use "sunset";
+@use "white";
+@use "black";
+
+/**
+* Color schemes
+*/
+
+// Light color scheme (Default)
+// Can be forced with data-theme="light"
+[data-theme="light"],
+:root:not([data-theme="black"]):not([data-theme="sunset"]):not([data-theme="white"]) {
+@include light.theme;
+}
+
+[data-theme="white"] {
+@include white.theme;
+}
+
+// Dark color scheme (Auto)
+// Automatically enabled if user has Dark mode enabled
+@media only screen and (prefers-color-scheme: dark) {
+:root:not([data-theme]):not([data-theme]):not([data-theme]) {
+    @include sunset.theme;
+}
+}
+
+@media only screen and (prefers-contrast: more) {
+  :root:not([data-theme]):not([data-theme]):not([data-theme]) {
+    @include white.theme;
+  }
+  @media only screen and (prefers-color-scheme: dark) {
+    :root:not([data-theme]):not([data-theme]):not([data-theme]) {
+      @include black.theme;
+    }
+  }
+}
+
+// Dark color scheme (Forced)
+// Enabled if forced with data-theme="dark"
+[data-theme="sunset"] {
+@include sunset.theme;
+}
+[data-theme="black"] {
+  @include black.theme;
+}
+
+#{$parent-selector} progress,
+#{$parent-selector} [type="checkbox"],
+#{$parent-selector} [type="radio"],
+#{$parent-selector} [type="range"] {
+accent-color: var(#{$css-var-prefix}primary);
+  }

@@ -6,7 +6,6 @@ module.exports = {
     cssnano: {
       preset: "advanced",
     },
-    "postcss-prune-var": {},
   },
   syntax: "postcss-scss",
 };
