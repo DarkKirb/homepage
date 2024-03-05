@@ -3183,13 +3183,6 @@ minimatch@^5.0.1:
   dependencies:
     brace-expansion "^2.0.1"
 
-minimatch@^9.0.0:
-  version "9.0.3"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-9.0.3.tgz#a6e00c3de44c3a542bfaae70abfc22420a6da825"
-  integrity sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg==
-  dependencies:
-    brace-expansion "^2.0.1"
-
 minimist-options@4.1.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/minimist-options/-/minimist-options-4.1.0.tgz"
@@ -3489,10 +3482,10 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.3.1:
   resolved "https://registry.npmjs.org/picomatch/-/picomatch-2.3.1.tgz"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
-pokemon@^2.3.6:
-  version "2.3.6"
-  resolved "https://registry.yarnpkg.com/pokemon/-/pokemon-2.3.6.tgz#056434e03896a3964db4c4c563bdb34ae4ea87f6"
-  integrity sha512-Pctu9QYk0mrCZIXXzMkx1zk21EeyLeT1yzVeA1N1t2vvotj+XXNliBZVrI7pxy7DSLhpjR92d24Vp0X/rWr00Q==
+pokemon@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/pokemon/-/pokemon-3.0.0.tgz#7f5d266e1b96a564b1e0e11b7259ab1f3bc2e081"
+  integrity sha512-k3sYWkfMVCe3Sj6RWIg8EoLLQ3Ahe8sfhHzLUXDQRT55bpD+r7kZax9AxGiTiqf+U8AV4XvsrhMZkojoJmPKsw==
   dependencies:
     unique-random-array "^2.0.0"
 
@@ -3788,13 +3781,6 @@ postcss-ordered-values@^6.0.1:
   dependencies:
     cssnano-utils "^4.0.1"
     postcss-value-parser "^4.2.0"
-
-postcss-prune-var@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/postcss-prune-var/-/postcss-prune-var-1.1.1.tgz#d93920764fc38e636817cd2fcd4a3d0f1a30a463"
-  integrity sha512-rQS389fV24ohdWYaMjs5PI9eV4vJr6u8qb/8oijomnvOh9Ceytrr1ZMLBt6bJzhH1eqDrFWceXp9SQ5NUPEwCg==
-  dependencies:
-    minimatch "^9.0.0"
 
 postcss-pseudo-class-any-link@^1.0.0:
   version "1.0.0"
