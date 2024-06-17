@@ -3507,10 +3507,10 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.3.1:
   resolved "https://registry.npmjs.org/picomatch/-/picomatch-2.3.1.tgz"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
-pokemon@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/pokemon/-/pokemon-3.0.0.tgz#7f5d266e1b96a564b1e0e11b7259ab1f3bc2e081"
-  integrity sha512-k3sYWkfMVCe3Sj6RWIg8EoLLQ3Ahe8sfhHzLUXDQRT55bpD+r7kZax9AxGiTiqf+U8AV4XvsrhMZkojoJmPKsw==
+pokemon@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/pokemon/-/pokemon-3.2.0.tgz#db86cbec33016173e49485cfc3093c4327ed391e"
+  integrity sha512-i31cLXuAEVKeIo5Sg5pESFfW4ccgdMxeU7edAB2hkVTZly5L2LRE3QrbhaTehBR1cppfT5G/512lZTUc0A/khQ==
   dependencies:
     unique-random-array "^2.0.0"
 
